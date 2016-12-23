@@ -26,32 +26,6 @@ function! MdDocInit(host)
     nmap <buffer> <localleader>s :call MdDocAutoCommitToggle()<cr>
     nmap <buffer> <localleader>c :call MdDocCommit("%")<cr>
 
-    " Setext style headers
-    nmap <buffer> <localleader>h yypVr=
-    nmap <buffer> <localleader>j yypVr-
-
-    " Text styling Bold Italic Fixed-width
-    " Note: "_yiw moves cursor to the beginning of the word
-    nmap <buffer> <localleader>b "_yiWi*<ESC>lEa*<ESC>
-    nmap <buffer> <localleader>i "_yiWi**<ESC>lEa**<ESC>
-    nmap <buffer> <localleader>f "_yiWi`<ESC>lEa`<ESC>
-
-    vmap <buffer> <localleader>b s*<C-r>"*<ESC>
-    vmap <buffer> <localleader>i s**<C-r>"**<ESC>
-    vmap <buffer> <localleader>f s`<C-r>"`<ESC>
-
-    nmap <buffer> <localleader>k "_yiwcw<kbd><C-r>"</kbd><ESC>
-
-    " Table Heading
-    nmap <buffer> <localleader>t yypV:s/[^\|]/-/g<cr>:noh<cr>yypV:s/-/ /g<cr>:noh<cr>
-
-    "Links
-    nmap <buffer> <localleader>[ yiwi[<ESC>Ea](<C-r>")<ESC>
-    nmap <buffer> <localleader>l lBi<<ESC>Ea><ESC>
-
-    vmap <buffer> <localleader>[ s[<C-r>"]()<ESC>i
-    vmap <buffer> <localleader>l s<<C-r>"><ESC>
-
     "View in browser
     execute "nnoremap <buffer> <localleader>v :update<cr>:!open http://".a:host."/%:t<cr>"
 
