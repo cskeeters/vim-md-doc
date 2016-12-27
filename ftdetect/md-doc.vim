@@ -10,18 +10,18 @@ augroup md-doc
 augroup END
 
 function! MdDocInit(host)
+    if &buftype != ''
+        return
+    endif
+
     if !exists("g:md_doc_auto_commit") || g:md_doc_auto_commit != 1
         echo "MdDocInit (Auto-Commit Disabled)"
     else
         echo "MdDocInit (Auto-Commit Enabled)"
     endif
 
-    setlocal wrap
-    setlocal linebreak
-    setf markdown
-
-    setlocal list
-    setlocal conceallevel=0
+    " In case we don't use a markdown extension on our file names
+    set filetype=markdown
 
     nmap <buffer> <localleader>s :call MdDocAutoCommitToggle()<cr>
     nmap <buffer> <localleader>c :call MdDocCommit("%")<cr>
