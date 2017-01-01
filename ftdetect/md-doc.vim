@@ -14,12 +14,6 @@ function! MdDocInit(host)
         return
     endif
 
-    if !exists("g:md_doc_auto_commit") || g:md_doc_auto_commit != 1
-        echo "MdDocInit (Auto-Commit Disabled)"
-    else
-        echo "MdDocInit (Auto-Commit Enabled)"
-    endif
-
     " In case we don't use a markdown extension on our file names
     set filetype=markdown
 
@@ -29,11 +23,19 @@ function! MdDocInit(host)
     "View in browser
     execute "nnoremap <buffer> <localleader>v :update<cr>:!open http://".a:host."/%:t<cr>"
 
-    " Call MdDocCommit when buffer is closed to commit
-    augroup md-docsave
-        autocmd!
-        autocmd VimLeavePre,BufDelete <buffer> call MdDocBufferClosed()
-    augroup END
+    if !empty(glob(expand("%:h")."/.hg"))
+        if !exists("g:md_doc_auto_commit") || g:md_doc_auto_commit != 1
+            echo "MdDocInit (Auto-Commit Disabled)"
+        else
+            echo "MdDocInit (Auto-Commit Enabled)"
+        endif
+
+        " Call MdDocCommit when buffer is closed to commit
+        augroup md-docsave
+            autocmd!
+            autocmd VimLeavePre,BufDelete <buffer> call MdDocBufferClosed()
+        augroup END
+    endif
 endfunction
 
 function! MdDocAutoCommitToggle()
