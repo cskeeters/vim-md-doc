@@ -18,7 +18,7 @@ function! MdDocInit(host)
     set filetype=markdown
 
     nmap <buffer> <localleader>s :call MdDocAutoCommitToggle()<cr>
-    nmap <buffer> <localleader>c :call MdDocCommit("%")<cr>
+    nmap <buffer> <localleader>c :update<cr>:call MdDocCommit("%")<cr>
 
     "View in browser
     execute "nnoremap <buffer> <localleader>v :update<cr>:!open http://".a:host."/%:t<cr>"
