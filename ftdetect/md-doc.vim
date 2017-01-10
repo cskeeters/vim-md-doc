@@ -24,9 +24,7 @@ function! MdDocInit(host)
     execute "nnoremap <buffer> <localleader>v :update<cr>:!open http://".a:host."/%:t<cr>"
 
     if !empty(glob(expand("%:h")."/.hg"))
-        if !exists("g:md_doc_auto_commit") || g:md_doc_auto_commit != 1
-            echo "MdDocInit (Auto-Commit Disabled)"
-        else
+        if exists("g:md_doc_auto_commit") && g:md_doc_auto_commit == 1
             echo "MdDocInit (Auto-Commit Enabled)"
         endif
 
