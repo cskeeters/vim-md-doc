@@ -21,7 +21,7 @@ function! MdDocInit(host)
     nmap <buffer> <localleader>c :update<cr>:call MdDocCommit("%")<cr>
 
     "View in browser
-    execute "nnoremap <buffer> <localleader>v :update<cr>:!open http://".a:host."/%:t<cr>"
+    execute "nnoremap <buffer> <localleader>v :update<cr>:MdDocOpen http://".a:host."/%:t<cr>"
 
     if !empty(glob(expand("%:h")."/.hg"))
         if exists("g:md_doc_auto_commit") && g:md_doc_auto_commit == 1
